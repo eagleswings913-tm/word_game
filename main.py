@@ -1,6 +1,24 @@
 import re
+import requests
 
-answer = 'frame'
+categories = ['animals', 'birds', 'wordle']
+answer = ''
+while True:
+    category = (input("Choose a category: (Animals, Birds, Wordle)\n ")).lower()
+    if category in categories:
+        break
+
+url = 'https://random-words-api.kushcreates.com/api'
+request_params = {'language': 'en', 'category': category, 'length': 5, 'type': 'lowercase', 'words': 1}
+response = requests.get(url, headers={"Accept": "application/json"}, params=request_params)
+if response.ok:
+    data = response.json()
+    answer = (data[0]['word'])
+    print(answer)
+else:
+    print(f'Encountered an error: HTTP Status Code: {response.status_code}')
+
+# answer = 'frame'
 correct = False
 number_of_guesses = 0
 message = ""
