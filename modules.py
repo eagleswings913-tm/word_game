@@ -10,7 +10,7 @@ def request_word_from_api(category):
         if response.ok:
             data = response.json()
             word = (data[0]['word'])
-            print(word)
+            # print(word)
             return word
         else:
             print(f'Encountered an error: HTTP Status Code: {response.status_code}')
